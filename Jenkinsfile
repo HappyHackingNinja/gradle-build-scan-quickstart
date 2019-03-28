@@ -15,14 +15,19 @@ pipeline {
             steps {
                 sh 'gradle test' 
             }
-            publishHTML target: [
-                allowMissing: false,
-                alwaysLinkToLastBuild: false,
-                keepAll: true,
-                reportDir: 'build/reports/tests/test',
-                reportFiles: 'index.html',
-                reportName: 'Gradle Report'
-            ]
+            post {
+                always {
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: 'build/reports/tests/test',
+                        reportFiles: 'index.html',
+                        reportName: 'Gradle Report'
+                    ]
+                }
+            }
+            
         }
     }
 }
